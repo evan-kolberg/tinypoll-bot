@@ -16,12 +16,12 @@ link = 'https://vote.usetinypoll.com/?poll=eyJwb2xsSUQiOiJDRTg3QzZEQy1GNjkzLTQ4N
 title = 'Hang out'
 
 
-def go(link, title):
-    driver.get(link)
+def go(alink, atitle):
+    driver.get(alink)
     WebDriverWait(driver, 8).until(expected_conditions.presence_of_element_located((By.ID, 'ember4')))
     driver.find_element(By.ID, 'ember4').send_keys('H4CK3R')
     driver.find_element(By.XPATH, '//button[normalize-space()="Save"]').click()
-    driver.find_element(By.XPATH, f'//span[text()="{title}"]').click()
+    driver.find_element(By.XPATH, f'//span[text()="{atitle}"]').click()
 
 
 if __name__ == '__main__':

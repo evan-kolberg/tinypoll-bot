@@ -3,8 +3,8 @@ import subprocess
 cmd = 'python bot.py'
 bots = int(input('How many bots would you like?:  '))
 
-def run(bots):
-    for i in range(bots):
+def run(abots):
+    for i in range(abots):
         subprocess.call(' python bot.py 1', shell=True)
 
 
