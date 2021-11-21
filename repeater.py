@@ -1,6 +1,5 @@
 import subprocess
 
-cmd = 'python bot.py'
 bots = int(input('How many bots would you like?:  '))
 
 def run(abots):

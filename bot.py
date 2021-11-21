@@ -26,3 +26,4 @@ def go(alink, atitle):
 
 if __name__ == '__main__':
     go(link, title)
+    driver.close()
