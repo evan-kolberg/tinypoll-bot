@@ -1,5 +1,4 @@
 # tinypoll-bot
-Explode tiny polls and annoy the sh!t outta your friends
 
 ![image](https://user-images.githubusercontent.com/70989484/142745314-d0379aee-f2ce-4736-a6ef-c1704632dd7b.png)
 
