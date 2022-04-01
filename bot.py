@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from time import sleep
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -12,18 +13,28 @@ s = Service('/Users/evankolberg/PycharmProjects/tinypoll-bot/chromedriver')
 
 driver = webdriver.Chrome(service=s, options=options)
 
-link = 'https://vote.usetinypoll.com/?poll=eyJwb2xsSUQiOiJDRTg3QzZEQy1GNjkzLTQ4NEEtQjI3NC02NTdEOTBFMzAxQzYiLCJ0aXRsZSI6IldoYXQgdG8gZG8iLCJvcHRpb25zIjpbeyJuYW1lIjoiR28gdG8gdG93biIsIm9wdGlvbklEIjoiMDE4Nzc0QjgtMEJGNy00NDI3LUEwRTUtMjJBQzc2RjEwMDVFIn0seyJuYW1lIjoiSWNlIHNrYXRpbmciLCJvcHRpb25JRCI6IkU0QTI0MUQyLTA3NUUtNEYxNC04NURDLTZFMkVFOTcyNzIyNCJ9LHsibmFtZSI6Ikhhbmcgb3V0Iiwib3B0aW9uSUQiOiIwODI1MDczQi04M0ZELTQ3RkYtOEUxRi1EMDhFQjcxQThBQzQifV19'
-title = 'Hang out'
+link = input('Enter Link:  ')
+name = input('Enter a Name:  ')
+option = input('Enter Your Choice:  ')
+
+# Note: You must find a way to clear the data of the current webdriver session, so you can re-login.
+# At this current state, you can only log in once and select an option, but can't re-login due to cookies, cache, etc.
+
+def login(arg_link, arg_name):
+    driver.get(arg_link)
+    WebDriverWait(driver, 8).until(
+        expected_conditions.presence_of_element_located((By.ID, 'ember4'))).send_keys(arg_name)
+    WebDriverWait(driver, 8).until(
+        expected_conditions.presence_of_element_located((By.XPATH, '//button[normalize-space()="Save"]'))).click()
 
 
-def go(alink, atitle):
-    driver.get(alink)
-    WebDriverWait(driver, 8).until(expected_conditions.presence_of_element_located((By.ID, 'ember4')))
-    driver.find_element(By.ID, 'ember4').send_keys('H4CK3R')
-    driver.find_element(By.XPATH, '//button[normalize-space()="Save"]').click()
-    driver.find_element(By.XPATH, f'//span[text()="{atitle}"]').click()
+def select_option(arg_option):
+    WebDriverWait(driver, 8).until(
+        expected_conditions.presence_of_element_located((By.XPATH, f'//span[text()="{arg_option}"]'))).click()
 
 
 if __name__ == '__main__':
-    go(link, title)
-    driver.close()
+    login(link, name)
+    sleep(2)
+    select_option(option)
+    driver.quit()
